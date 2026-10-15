@@ -1,0 +1,38 @@
+name: math-wiz
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Tests
+        run: CC=clang SANITIZE=1 ./tests/run.sh
+
+  flipper:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: uFBT
+        run: |
+          python3 -m venv .tools/venv
+          .tools/venv/bin/python -m pip install ufbt==0.2.6
+      - name: Build
+        env:
+          UFBT_HOME: ${{ runner.temp }}/math-wiz-ufbt
+        run: |
+          .tools/venv/bin/ufbt update --channel=release
+          .tools/venv/bin/ufbt
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: math-wiz-official-release
+          path: dist/math_wiz.fap
+          if-no-files-found: error

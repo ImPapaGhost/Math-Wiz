@@ -1,0 +1,14 @@
+App(
+    appid="math_wiz",
+    name="Math Wiz",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="math_wiz_main",
+    stack_size=8 * 1024,
+    sources=["math_wiz.c", "math_app.c", "math_engine.c", "math_graph.c", "math_ui.c"],
+    fap_category="Tools",
+    fap_version="2.0",
+    fap_icon="math_wiz.png",
+    fap_description="Pocket calculator with pan, zoom, and trace graphs",
+    fap_author="Papa_Ghost",
+    fap_weburl="https://github.com/ImPapaGhost/Math-Wiz",
+)

@@ -1,0 +1,9 @@
+.tools/
+.ufbt/
+.env
+build/
+.DS_Store
+dist/debug/
+
+.vscode/compile_commands.json
+tests/*.dSYM/
